@@ -4,11 +4,34 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/* Outer container */
 main {
     padding: 10px;
 
 }
 
+/* header container */
 #heading {
+    margin: 10px;
 
 }
+
+#highscores {
+    float: left;
+}
+
+#time {
+    float: right;
+    margin-top: 0px;
+}
+
+/* inner container */
+
+#container {
+
+}
+
+/* start quiz container */
+
+
+/* actual Quiz */
