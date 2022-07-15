@@ -19,41 +19,92 @@ let timeClock = document.getElementById("time");
 let begin = document.getElementById("beginning");
 let startButton = document.getElementById("start");
 let mainQuestions = document.getElementById("questions");
+let quest = document.getElementById("q");
+let ans = document.getElementById("a");
+
 
 let clear = document.getElementById("clear");
 let highScoreList = document.getElementById("hslist");
 let scoreList = [];
-let timer;
-let timerCount;
+let currentQ = 0;
+let secondsLeft = 75;
 
 
 
 const allQuestions = [{
     question: "What is HTML?",
-    answers: {
-        a: "Hi there mad language",
-        b: "Hypertext Markup Language",
-        c: "Hypertext Markdown Language",
-        d: "Hypertyping Markup Language"
-    },
-    correctAnswer: "b"
+    answers: [
+        "Hi there mad language",
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hypertyping Markup Language"
+    ],
+    correctAnswer: "Hypertext Markup Language"
 },
 {
     question: "What uses a condition ? ture | false format?",
-    answers: {
-        a: "Tertiary Operators",
-        b: "Ternary Conditions",
-        c: "Ternary Operators",
-        d: "Triceratops Methods"
-    },
-    correctAnswer: "c"
+    answers: [
+        "Tertiary Operators",
+        "Ternary Conditions",
+        "Ternary Operators",
+        "Triceratops Methods"
+    ],
+    correctAnswer: "Ternary Operators"
 }
 ];    
 
-console.log (allQuestions);
 
 function startGame(){
-    console.log("hello");
+    mainQuestions.setAttribute("style", "display: flex");
+    startTimer();
+    game();
 }
 
-startButton.addEventListener("click", startGame);
+function game(){
+    quest.innerHTML = "";
+    ans.innerHTML = "";
+    quest.textContent = allQuestions[currentQ].question;
+    for (let index = 0; index < 4; index++) {
+        let list = document.createElement("li");
+        list.addEventListener("click", function() {
+            if (this.textContent === allQuestions[currentQ].correctAnswer){
+                currentQ++;
+                game();
+
+            } else {
+                currentQ++;
+                //timer and subtract
+                game();
+                
+            }
+            ;
+        })
+
+        list.textContent = allQuestions[currentQ].answers[index];
+        ans.append(list);
+
+    }
+}
+function startTimer () {
+    let timerInterval = setInterval(function(){
+        secondsLeft--;
+        timeClock.textContent = "Time Remaining: " + secondsLeft;
+        if(secondsLeft === 0){
+            clearInterval(timerInterval);
+            endGame();
+
+        }
+    }, 1000)
+}
+
+function endGame(){
+
+}
+
+
+startButton.addEventListener("click", function (){
+    begin.setAttribute("style", "display: none");
+    startGame();
+    
+
+});
