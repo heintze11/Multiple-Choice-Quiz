@@ -54,18 +54,20 @@ header a {
     font-size: large;
 }
 
-#intro {
-
-}
 
 #questions {
     display: none;
+    flex-direction: column;
 }
 
-/* start quiz container */
+
+#save-score {
+    display: none;
+}
 
 
-/* actual Quiz */
+
+
 
 
 /* high Scores */
