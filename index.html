@@ -12,7 +12,7 @@
     <!-- header -->
     <header>
         <a href="./Assets/highscores.html">View High Scores</a>
-        <p id="time">Time Remaining:</p>
+        <p id="time">Total Time: 75 Secs</p>
     </header>
                
     <!-- inside question container -->
@@ -32,7 +32,10 @@
         
         <!-- submit high score div - hidden -->
         <div id="save-score">
-            <form action="submit"></form>
+            <form>
+                <input type="text" placeholder="Initials" id="initials">
+                <button id="submit">Submit Score</button>
+            </form>
             <button id="start-over">Try Again</button>
 
         </div>

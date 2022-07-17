@@ -22,14 +22,19 @@ let startButton = document.getElementById("start");
 let mainQuestions = document.getElementById("questions");
 let quest = document.getElementById("q");
 let ans = document.getElementById("a");
-
+let scores = document.getElementById("save-score");
+let retry = document.getElementById("start-over");
+let submit = document.getElementById("submit");
 
 let clear = document.getElementById("clear");
 let highScoreList = document.getElementById("hslist");
+
 let scoreList = [];
 let currentQ = 0;
 let secondsLeft = 75;
-
+let timerInterval;
+let score;
+let initials = document.getElementById("initials");
 
 
 const allQuestions = [{
@@ -113,24 +118,42 @@ function game(){
 }
 
 function startTimer () {
-    let timerInterval = setInterval(function(){
+    timerInterval = setInterval(function(){
         secondsLeft--;
         timeClock.textContent = "Time Remaining: " + secondsLeft;
         if(secondsLeft === 0){
             clearInterval(timerInterval);
             endGame();
-
         }
     }, 1000)
 }
 
-function endGame(){
-    //pause timer
+//endgame and save scores to local storage
+ //pause timer
     //set score as time left
-    //show save-score
     //save to local storage time left and initials
-
+function endGame(){
+    if(secondsLeft != 0){
+        clearInterval(timerInterval);
+        score = secondsLeft;
+    }
+    mainQuestions.setAttribute("style", "display: none");
+    scores.setAttribute("style", "display: flex");
+    submit.addEventListener("click", function(event){
+        event.preventDefault();
+        let highScore = {
+            initials: initials.value.trim(),
+            score
+        };
+        localStorage.setItem("highScore", JSON.stringify(highScore));
+    })
 }
+
+
+retry.addEventListener("click", function (){
+    scores.setAttribute("style", "display: none");
+    startGame();
+});
 
  //clear high scores function
 
