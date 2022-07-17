@@ -25,6 +25,7 @@ let ans = document.getElementById("a");
 let scores = document.getElementById("save-score");
 let retry = document.getElementById("start-over");
 let submit = document.getElementById("submit");
+let highScoreDisplay = document.getElementById("high-score-page");
 
 let clear = document.getElementById("clear");
 let highScoreList = document.getElementById("hslist");
@@ -34,7 +35,7 @@ let currentQ = 0;
 let secondsLeft = 75;
 let timerInterval;
 let score;
-let initials = document.getElementById("initials");
+let initials = document.getElementById("initials"); 
 
 
 const allQuestions = [{
@@ -82,6 +83,8 @@ const allQuestions = [{
 
 function startGame(){
     mainQuestions.setAttribute("style", "display: flex");
+    currentQ = 0;
+    secondsLeft = 75;
     startTimer();
     game();
 }
@@ -109,10 +112,10 @@ function game(){
 
             list.textContent = allQuestions[currentQ].answers[index];
             ans.append(list);
-            list.setAttribute("style", "padding: 10px 0")
+            list.setAttribute("style", "padding: 10px 0");
+            list.setAttribute("style", "border-style: solid")
         }
     } else {
-        // has to clear timer counter.
         endGame();
     }
 }
@@ -139,27 +142,54 @@ function endGame(){
     }
     mainQuestions.setAttribute("style", "display: none");
     scores.setAttribute("style", "display: flex");
+    setHighScore();
+}
+
+function setHighScore (){
     submit.addEventListener("click", function(event){
         event.preventDefault();
         let highScore = {
             initials: initials.value.trim(),
             score
         };
-        localStorage.setItem("highScore", JSON.stringify(highScore));
+
+        scoreList.push(highScore);
+        scoreList.sort((a,b) => a.score - b.score);
+        
+        localStorage.setItem("highScore", JSON.stringify(scoreList));
+        
     })
 }
 
 
-retry.addEventListener("click", function (){
-    scores.setAttribute("style", "display: none");
-    startGame();
-});
+
+//not working
+//Display high scores
+highScoreDisplay.addEventListener("click", function(){
+    
+    var allScores = JSON.parse(localStorage.getItem("highScore"));
+    for (let index = 0; index < highScore.length; index++) {
+        let hscore = document.createElement("li");
+}});
 
  //clear high scores function
 
 startButton.addEventListener("click", function (){
     begin.setAttribute("style", "display: none");
     startGame();
-    
-
 });
+
+//not working
+retry.addEventListener("click", function (){
+    console.log("clicked");
+    scores.setAttribute("style", "display: none");
+    startGame();
+});
+
+
+
+//retry button not working
+//save high scores into array
+//post high scores on highscore page
+//timer stops on page before last wrong answer is subtracted
+    //stored timer # is correct
