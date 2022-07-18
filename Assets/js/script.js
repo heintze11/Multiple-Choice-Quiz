@@ -26,8 +26,9 @@ let scores = document.getElementById("save-score");
 let retry = document.getElementById("start-over");
 let submit = document.getElementById("submit");
 let highScoreDisplay = document.getElementById("high-score-page");
+let finalScore = document.getElementById("final-score");
 
-let clear = document.getElementById("clear");
+
 let highScoreList = document.getElementById("hslist");
 
 let scoreList = [];
@@ -144,6 +145,8 @@ function endGame(){
     mainQuestions.setAttribute("style", "display: none");
     scores.setAttribute("style", "display: flex");
     setHighScore();
+    finalScore.textContent = ("Your Final Score is: " + score);
+    timeClock.textContent = ("Total Time: 75 Secs");
 }
 
 function setHighScore (){
@@ -153,27 +156,23 @@ function setHighScore (){
             initials: initials.value.trim(),
             score
         };
-        // scoreList = JSON.parse(localStorage.getItem("highScore"));
 
         scoreList.push(highScore);
-        // scoreList.sort((a,b) => a.score - b.score);
         
+        //sort by largest
+        scoreList.sort((a,b) => b.score - a.score);
+        
+        //only keep the highest
+        scoreList.splice(5);
+
+
         localStorage.setItem("highScore", JSON.stringify(scoreList));
+
+        
+        initials.value = "";
         
     })
 }
-
-
-
-//not working
-//Display high scores
-highScoreDisplay.addEventListener("click", function(){
-    
-    var allScores = JSON.parse(localStorage.getItem("highScore"));
-    for (let index = 0; index < highScore.length; index++) {
-        let hscore = document.createElement("li");
-}});
-
 
 startButton.addEventListener("click", function (){
     begin.setAttribute("style", "display: none");
