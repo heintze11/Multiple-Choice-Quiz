@@ -125,6 +125,7 @@ function startTimer () {
         secondsLeft--;
         timeClock.textContent = "Time Remaining: " + secondsLeft;
         if(secondsLeft === 0){
+            score = secondsLeft;
             clearInterval(timerInterval);
             endGame();
         }
@@ -152,9 +153,10 @@ function setHighScore (){
             initials: initials.value.trim(),
             score
         };
+        // scoreList = JSON.parse(localStorage.getItem("highScore"));
 
         scoreList.push(highScore);
-        scoreList.sort((a,b) => a.score - b.score);
+        // scoreList.sort((a,b) => a.score - b.score);
         
         localStorage.setItem("highScore", JSON.stringify(scoreList));
         
@@ -172,7 +174,6 @@ highScoreDisplay.addEventListener("click", function(){
         let hscore = document.createElement("li");
 }});
 
- //clear high scores function
 
 startButton.addEventListener("click", function (){
     begin.setAttribute("style", "display: none");
@@ -188,7 +189,6 @@ retry.addEventListener("click", function (){
 
 
 
-//retry button not working
 //save high scores into array
 //post high scores on highscore page
 //timer stops on page before last wrong answer is subtracted
