@@ -138,7 +138,6 @@ function startTimer () {
     //set score as time left
     //save to local storage time left and initials
 function endGame(){
-    console.log("test")
     if(secondsLeft != 0){
         clearInterval(timerInterval);
         score = secondsLeft;
@@ -157,17 +156,29 @@ submit.addEventListener("click", function(event){
     };
     console.log(highScore);
 
+    
+    let previousHighscores = JSON.parse(localStorage.getItem("highScore"));
+    
+
+    
+    if(previousHighscores != null) {
+        for (let index = 0; index < previousHighscores.length; index++) {
+            scoreList.push(previousHighscores[index]);
+        }
+    }
+    
     scoreList.push(highScore);
+    console.log(scoreList);
     
     //sort by largest
     scoreList.sort((a,b) => b.score - a.score);
     
     //only keep the highest
     scoreList.splice(5);
-
+   
     //store scorelist in local storage
     localStorage.setItem("highScore", JSON.stringify(scoreList));
-
+    scoreList = [];
     highScore = {};
     initials.value = "";
 });
@@ -183,10 +194,3 @@ retry.addEventListener("click", function (){
     scores.setAttribute("style", "display: none");
     startGame();
 });
-
-
-
-//save high scores into array
-//post high scores on highscore page
-//timer stops on page before last wrong answer is subtracted
-    //stored timer # is correct
