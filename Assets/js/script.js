@@ -138,48 +138,46 @@ function startTimer () {
     //set score as time left
     //save to local storage time left and initials
 function endGame(){
+    console.log("test")
     if(secondsLeft != 0){
         clearInterval(timerInterval);
         score = secondsLeft;
     }
     mainQuestions.setAttribute("style", "display: none");
     scores.setAttribute("style", "display: flex");
-    setHighScore();
     finalScore.textContent = ("Your Final Score is: " + score);
     timeClock.textContent = ("Total Time: 75 Secs");
 }
 
-function setHighScore (){
-    submit.addEventListener("click", function(event){
-        event.preventDefault();
-        let highScore = {
-            initials: initials.value.trim(),
-            score
-        };
+submit.addEventListener("click", function(event){
+    event.preventDefault();
+    let highScore = {
+        initials: initials.value.trim(),
+        score
+    };
+    console.log(highScore);
 
-        scoreList.push(highScore);
-        
-        //sort by largest
-        scoreList.sort((a,b) => b.score - a.score);
-        
-        //only keep the highest
-        scoreList.splice(5);
+    scoreList.push(highScore);
+    
+    //sort by largest
+    scoreList.sort((a,b) => b.score - a.score);
+    
+    //only keep the highest
+    scoreList.splice(5);
 
+    //store scorelist in local storage
+    localStorage.setItem("highScore", JSON.stringify(scoreList));
 
-        localStorage.setItem("highScore", JSON.stringify(scoreList));
-
-        
-        initials.value = "";
-        
-    })
-}
+    highScore = {};
+    initials.value = "";
+});
 
 startButton.addEventListener("click", function (){
     begin.setAttribute("style", "display: none");
     startGame();
 });
 
-//not working
+
 retry.addEventListener("click", function (){
     console.log("clicked");
     scores.setAttribute("style", "display: none");
