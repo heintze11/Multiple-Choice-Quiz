@@ -5,16 +5,24 @@ function postHighScores (){
     let list = JSON.parse(localStorage.getItem("highScore"));
 
     for (let index = 0; index < list.length; index++){
-        let allScores = JSON.parse(localStorage.getItem("highScore"));
-        let hscore = document.createElement("li");
+        const initials = JSON.parse(localStorage.getItem("initials"));
+        const initialCreation = document.createElement("li");
+        initialCreation.textContent = initials[index];
+
+        const scores = JSON.parse(localStorage.getItem("score"));
+        const scoreCreation = document.createElement("li");
+        scoreCreation.textContent = scores[index];
+
         
     }
 }
 
 
 clear.addEventListener("click", function(){
-    localStorage.removeItem("highScores");
+    localStorage.removeItem("initials");
+    localStorage.removeItem("score");
     postHighScores();
 })
 
 postHighScores();
+
