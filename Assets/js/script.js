@@ -106,7 +106,6 @@ function game(){
                     currentQ++;
                     secondsLeft -= 15;
                     game();
-                    
                 }
                 ;
             })
@@ -154,12 +153,8 @@ submit.addEventListener("click", function(event){
         initials: initials.value.trim(),
         score
     };
-    console.log(highScore);
 
-    
     let previousHighscores = JSON.parse(localStorage.getItem("highScore"));
-    
-
     
     if(previousHighscores != null) {
         for (let index = 0; index < previousHighscores.length; index++) {
@@ -168,7 +163,6 @@ submit.addEventListener("click", function(event){
     }
     
     scoreList.push(highScore);
-    console.log(scoreList);
     
     //sort by largest
     scoreList.sort((a,b) => b.score - a.score);
@@ -188,9 +182,7 @@ startButton.addEventListener("click", function (){
     startGame();
 });
 
-
 retry.addEventListener("click", function (){
-    console.log("clicked");
     scores.setAttribute("style", "display: none");
     startGame();
 });

@@ -6,7 +6,6 @@ function postHighScores (){
     console.log(list);
     
         for (let i= 0; i< list.length; i++){
-            //const initials = JSON.parse(localStorage.getItem("initials"));
             console.log(list[i]);
             const initialCreation = document.createElement("li");
             initialCreation.textContent = list[i].initials + " : " + list[i].score;
